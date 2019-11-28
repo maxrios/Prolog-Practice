@@ -6,3 +6,4 @@ contains(X, [_|R]) :- contains(X, R).
 %R represents cdr of the list.
 remove(X, [X|R], R).
 remove(X, [F|R], [F|S]) :- remove(X, R, S).
+

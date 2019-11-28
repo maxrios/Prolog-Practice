@@ -9,6 +9,7 @@ roadTrip(X) :- driving(X), hasSnacks(X).
 carModel(max, f150).
 carModel(kyle, f150).
 carModel(nick, f150).
+carModel(ashley, tucson).
 
 shareCar(X, Y) :- carModel(X, Z), carModel(Y, Z), X\=Y.
 
