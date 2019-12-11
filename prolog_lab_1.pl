@@ -4,21 +4,29 @@ oddIndices([X], [X]).
 oddIndices([First, Second | Rest], Z) :- oddIndices(Rest, RestOdd), append([First], RestOdd, Z).
 
 %2.
-/*
-	Notes for sublist:
-
-	Objective:
-		We want to find the first parameter's elements inside of the second parameter in the given order.
-
-	Steps:
-		Compare the head of the first parameter to each element in the second parameter until there is a match,
-		then compare the tail of the first parameter to see if all elements are found consecutively in second
-		parameter. 
-
-		Utilization of member can be used to find if the Head of the first parameter is found within the second 
-		parameter.
-*/
-
 sublist([], _).
-sublist([Head|Tail], Z) :- member(Head, Z), sublist(Tail, Z).
+sublist([Head|Tail], [Head|Z]) :- sublist(Tail, Z).
+sublist(Sub, [Head|Z]) :- sublist(Sub, Z).
 
+%3.
+max(A, B, B) :- A < B.
+max(A, B, A) :- A > B.
+
+maxlist([A], A).
+maxlist([Head|Tail], A) :- maxlist(Tail, Max), max(Max, Head, A).
+
+disjointRange([], _).
+disjointRange([Head|Tail], Z) :- disjointRange(Tail, Z), maxlist(Z, Max), Max > Head.
+
+%4. 
+%splitter(L, L1, L2).
+%merger(L1, L2, LN). 
+%mergesort(L, LS).
+
+splitter([], [], []).
+splitter([A], [A], []).
+splitter([First, Second|Tail], [First|L1], [Second|L2]) :- splitter(Tail, L1, L2).
+
+merger([], [], []).
+merger([A], [], [A]).
+merger([L1Head|L1Tail], [L2Head|L2Tail], Z) :- merger(L1Tail, L2Tail, MergedList), 
