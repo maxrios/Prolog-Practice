@@ -25,11 +25,19 @@ isReverse([A|X],Z) :- isReverse(X,Y), append(Y, [A], Z).
 
 palindrome(X) :- isReverse(X,X).
 
-%3. NOT FINISHED
-intersect([],[],Z).
-intersect([Head1|Tail1],[Head2|Tail2],Z) :- intersect(Tail1,Tail2,Y), append(Y,[Head1],Z).
+%3.
+intersect(_, [], []).
+intersect([], _, []).
+intersect([Head|Tail1], [Head|Tail2], [Head|Z]) :- intersect(Tail1, Tail2, Z).
+intersect([Head|Tail1], [Head2|Tail2], Z) :- Head > Head2, intersect([Head|Tail1], Tail2, Z).
+intersect([Head|Tail1], [Head2|Tail2], Z) :- Head < Head2, intersect(Tail1, [Head2|Tail2], Z).
 
-%4. NOT FINISHED
+%4.
 /*
+	I may be confused on what is being asked here.
 	
+	[X -> 1, Y -> 2 | Z -> [3,4]]
+
+	[X -> 3, Y -> 4 | Z -> []]
+
 */
